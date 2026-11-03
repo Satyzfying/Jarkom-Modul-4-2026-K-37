@@ -32,6 +32,8 @@
 
 ---
 
+### [Link Spreadsheets Apabila Diperlukan](https://docs.google.com/spreadsheets/d/1TZ3GKxkN8_L-7-kRdzaCneHPJdd8hT0XA6zwqGjm7FA/edit?gid=1207380698#gid=1207380698)
+
 ### Tabel Pembagian Interface & Alamat IP
 
 Prefix ip : 10.82.x.x (Base Network: 10.82.0.0/19, Netmask: 255.255.224.0)
@@ -143,7 +145,7 @@ Tujuan dari tahapan ini adalah merancang pengalamatan IP yang efisien dan terstr
 | 24 | **P2P Knights - Phantoma** | 2 | `255.255.255.252` (/30) | `10.82.16.84` | `10.82.16.85 - 10.82.16.86` | `10.82.16.87` | Knights: `.85`, Phantoma: `.86` |
 | 25 | **P2P Phantoma - Shibuya** | 2 | `255.255.255.252` (/30) | `10.82.16.88` | `10.82.16.89 - 10.82.16.90` | `10.82.16.91` | Phantoma: `.89`, Shibuya: `.90` |
 
-*File Spreadsheet Excel resmi*: [`Template Spreadsheet Modul 4 Komdat Jarkom 2026 - Kelompok 37.xlsx`](Template%20Spreadsheet%20Modul%204%20Komdat%20Jarkom%202026%20-%20Kelompok%2037.xlsx)
+*File Spreadsheet Excel resmi*: [`Kelompok 37 - Spreadsheet Modul 4 Komdat Jarkom 2026.xlsx`](Kelompok%2037%20-%20Spreadsheet%20Modul%204%20Komdat%20Jarkom%202026.xlsx)
 
 Bukti Tangkapan Layar Lembar Perhitungan Spreadsheet VLSM:
 ![Bukti Spreadsheet VLSM](assets/3-spreadsheet-vlsm.png)
@@ -524,4 +526,3 @@ Ping statistics for 8.8.8.8:
 ```
 Bukti Tangkapan Layar Ping Internet via NAT:
 ![Bukti Ping Internet NAT](assets/9-ping-internet.png)
-
