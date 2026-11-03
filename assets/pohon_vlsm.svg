@@ -1,0 +1,381 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="2200" viewBox="0 0 3200 2200">
+    <rect width="3200" height="2200" fill="#F8FAFC" />
+    <rect x="0" y="0" width="3200" height="110" fill="#1E293B" />
+    <text x="1600" y="45" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#FFFFFF" text-anchor="middle">DIAGRAM POHON BINER (TREE) VLSM — THE WIRED EXPANSION</text>
+    <text x="1600" y="85" font-family="Arial, sans-serif" font-size="16" fill="#94A3B8" text-anchor="middle">Kelompok: K-37  |  Prefix Induk: 10.82.0.0/19 (8.192 IP)  |  Total Subnet: 25 Subnet (16 LAN/Multi-Access + 9 WAN P2P)  |  Orang 1</text>
+    
+    <rect x="1420" y="170" width="360" height="65" rx="10" fill="#0F172A" stroke="#38BDF8" stroke-width="3" />
+    <text x="1600" y="196" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#F8FAFC" text-anchor="middle">BLOK INDUK: 10.82.0.0/19</text>
+    <text x="1600" y="220" font-family="Arial, sans-serif" font-size="13" fill="#94A3B8" text-anchor="middle">Kapasitas: 8.192 Alamat IP (100% Valid)</text>
+    
+    <line x1="1500" y1="235" x2="650" y2="240" stroke="#64748B" stroke-width="2" />
+    <rect x="500" y="240" width="300" height="45" rx="8" fill="#1E3A8A" stroke="#60A5FA" stroke-width="2" />
+    <text x="650" y="262" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#FFFFFF" text-anchor="middle">CABANG 1: 10.82.0.0/20</text>
+    <text x="650" y="278" font-family="Arial, sans-serif" font-size="11" fill="#BFDBFE" text-anchor="middle">Subnet 1 s.d. 12 (Kapasitas: 4.096 IP)</text>
+    
+    <line x1="1700" y1="235" x2="2150" y2="240" stroke="#64748B" stroke-width="2" />
+    <rect x="2000" y="240" width="300" height="45" rx="8" fill="#065F46" stroke="#34D399" stroke-width="2" />
+    <text x="2150" y="262" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#FFFFFF" text-anchor="middle">CABANG 2: 10.82.16.0/20</text>
+    <text x="2150" y="278" font-family="Arial, sans-serif" font-size="11" fill="#A7F3D0" text-anchor="middle">Subnet 13 s.d. 25 + Cadangan (4.096 IP)</text>
+    <path d="M 650 285 L 700 300" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="300" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="300" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="324" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="322" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 1: Switch3 (Karl &amp; Lin)</text>
+        <text x="1135" y="322" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 881 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="355" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.0.0 <tspan font-weight="bold" fill="#1E40AF">(/22)</tspan></text>
+        <text x="630" y="355" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.3.255</text>
+        
+        <text x="265" y="385" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.0.1 - 10.82.3.254</text>
+        <path d="M 650 285 L 700 440" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="440" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="440" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="464" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="462" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 2: Switch5 (Omnipresence &amp; Denpa)</text>
+        <text x="1135" y="462" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 514 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="495" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.4.0 <tspan font-weight="bold" fill="#1E40AF">(/22)</tspan></text>
+        <text x="630" y="495" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.7.255</text>
+        
+        <text x="265" y="525" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.4.1 - 10.82.7.254</text>
+        <path d="M 650 285 L 700 580" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="580" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="580" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="604" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="602" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 3: Switch4 (Masayuki)</text>
+        <text x="1135" y="602" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 301 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="635" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.8.0 <tspan font-weight="bold" fill="#1E40AF">(/23)</tspan></text>
+        <text x="630" y="635" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.9.255</text>
+        
+        <text x="265" y="665" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.8.1 - 10.82.9.254</text>
+        <path d="M 650 285 L 700 720" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="720" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="720" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="744" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="742" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 4: Switch9 (Collective &amp; Ghost)</text>
+        <text x="1135" y="742" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 287 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="775" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.10.0 <tspan font-weight="bold" fill="#1E40AF">(/23)</tspan></text>
+        <text x="630" y="775" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.11.255</text>
+        
+        <text x="265" y="805" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.10.1 - 10.82.11.254</text>
+        <path d="M 650 285 L 700 860" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="860" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="860" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="884" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="882" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 5: Switch6 (Alice &amp; Reika)</text>
+        <text x="1135" y="882" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 254 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="915" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.12.0 <tspan font-weight="bold" fill="#1E40AF">(/24)</tspan></text>
+        <text x="630" y="915" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.12.255</text>
+        
+        <text x="265" y="945" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.12.1 - 10.82.12.254</text>
+        <path d="M 650 285 L 700 1000" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="1000" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="1000" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="1024" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="1022" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 6: Switch8 (Yasuo, Miho, Kuma)</text>
+        <text x="1135" y="1022" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 143 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="1055" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.13.0 <tspan font-weight="bold" fill="#1E40AF">(/24)</tspan></text>
+        <text x="630" y="1055" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.13.255</text>
+        
+        <text x="265" y="1085" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.13.1 - 10.82.13.254</text>
+        <path d="M 650 285 L 700 1140" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="1140" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="1140" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="1164" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="1162" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 7: Switch10 (Lilith &amp; Specter)</text>
+        <text x="1135" y="1162" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 99 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="1195" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.14.0 <tspan font-weight="bold" fill="#1E40AF">(/25)</tspan></text>
+        <text x="630" y="1195" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.14.127</text>
+        
+        <text x="265" y="1225" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.14.1 - 10.82.14.126</text>
+        <path d="M 650 285 L 700 1280" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="1280" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="1280" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="1304" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="1302" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 8: Switch1 (JJ &amp; MyuMyu)</text>
+        <text x="1135" y="1302" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 86 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="1335" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.14.128 <tspan font-weight="bold" fill="#1E40AF">(/25)</tspan></text>
+        <text x="630" y="1335" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.14.255</text>
+        
+        <text x="265" y="1365" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.14.129 - 10.82.14.254</text>
+        <path d="M 650 285 L 700 1420" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="1420" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="1420" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="1444" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="1442" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 9: Switch13 (Lain &amp; Mika)</text>
+        <text x="1135" y="1442" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 62 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="1475" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.15.0 <tspan font-weight="bold" fill="#1E40AF">(/26)</tspan></text>
+        <text x="630" y="1475" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.15.63</text>
+        
+        <text x="265" y="1505" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.15.1 - 10.82.15.62</text>
+        <path d="M 650 285 L 700 1560" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="1560" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="1560" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="1584" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="1582" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 10: Switch7 (Taro)</text>
+        <text x="1135" y="1582" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 58 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="1615" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.15.64 <tspan font-weight="bold" fill="#1E40AF">(/26)</tspan></text>
+        <text x="630" y="1615" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.15.127</text>
+        
+        <text x="265" y="1645" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.15.65 - 10.82.15.126</text>
+        <path d="M 650 285 L 700 1700" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="1700" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="1700" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="1724" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="1722" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 11: Switch11 (Chisa &amp; Hodgeson)</text>
+        <text x="1135" y="1722" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 33 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="1755" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.15.128 <tspan font-weight="bold" fill="#1E40AF">(/26)</tspan></text>
+        <text x="630" y="1755" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.15.191</text>
+        
+        <text x="265" y="1785" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.15.129 - 10.82.15.190</text>
+        <path d="M 650 285 L 700 1840" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="250" y="1840" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="250" y="1840" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="250" y="1864" width="900" height="8" fill="#DBEAFE" />
+        <text x="265" y="1862" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 12: Juri (Direct)</text>
+        <text x="1135" y="1862" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 32 Host</text>
+        
+        <!-- Details row -->
+        <text x="265" y="1895" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.15.192 <tspan font-weight="bold" fill="#1E40AF">(/26)</tspan></text>
+        <text x="630" y="1895" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.15.255</text>
+        
+        <text x="265" y="1925" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.15.193 - 10.82.15.254</text>
+        <path d="M 2150 285 L 2200 300" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="300" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="300" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="1750" y="324" width="900" height="8" fill="#DBEAFE" />
+        <text x="1765" y="322" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 13: Switch12 (Semi)</text>
+        <text x="2635" y="322" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 15 Host</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="355" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.0 <tspan font-weight="bold" fill="#1E40AF">(/27)</tspan></text>
+        <text x="2130" y="355" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.31</text>
+        
+        <text x="1765" y="385" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.1 - 10.82.16.30</text>
+        <path d="M 2150 285 L 2200 440" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="440" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#D8B4FE" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="440" width="900" height="32" rx="8" fill="#F3E8FF" />
+        <rect x="1750" y="464" width="900" height="8" fill="#F3E8FF" />
+        <text x="1765" y="462" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#6B21A8">Subnet 14: Switch2 (Multi-Access 4 Router)</text>
+        <text x="2635" y="462" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#6B21A8" text-anchor="end">Kebutuhan: 4 Router</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="495" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.32 <tspan font-weight="bold" fill="#6B21A8">(/29)</tspan></text>
+        <text x="2130" y="495" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.39</text>
+        
+        <text x="1765" y="525" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.33 - 10.82.16.38</text>
+        <path d="M 2150 285 L 2200 580" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="580" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="580" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="1750" y="604" width="900" height="8" fill="#DBEAFE" />
+        <text x="1765" y="602" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 15: Akashic (Direct)</text>
+        <text x="2635" y="602" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 4 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="635" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.40 <tspan font-weight="bold" fill="#1E40AF">(/29)</tspan></text>
+        <text x="2130" y="635" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.47</text>
+        
+        <text x="1765" y="665" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.41 - 10.82.16.46</text>
+        <path d="M 2150 285 L 2200 720" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="720" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="720" width="900" height="32" rx="8" fill="#DBEAFE" />
+        <rect x="1750" y="744" width="900" height="8" fill="#DBEAFE" />
+        <text x="1765" y="742" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 16: Eiri (Direct)</text>
+        <text x="2635" y="742" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 3 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="775" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.48 <tspan font-weight="bold" fill="#1E40AF">(/29)</tspan></text>
+        <text x="2130" y="775" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.55</text>
+        
+        <text x="1765" y="805" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.49 - 10.82.16.54</text>
+        <path d="M 2150 285 L 2200 860" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="860" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="860" width="900" height="32" rx="8" fill="#FFEDD5" />
+        <rect x="1750" y="884" width="900" height="8" fill="#FFEDD5" />
+        <text x="1765" y="882" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9A3412">Subnet 17: Link Cyberia - Wired</text>
+        <text x="2635" y="882" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#9A3412" text-anchor="end">Kebutuhan: 2 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="915" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.56 <tspan font-weight="bold" fill="#9A3412">(/30)</tspan></text>
+        <text x="2130" y="915" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.59</text>
+        
+        <text x="1765" y="945" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.57 - 10.82.16.58</text>
+        <path d="M 2150 285 L 2200 1000" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="1000" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="1000" width="900" height="32" rx="8" fill="#FFEDD5" />
+        <rect x="1750" y="1024" width="900" height="8" fill="#FFEDD5" />
+        <text x="1765" y="1022" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9A3412">Subnet 18: Link Wired - Tachibana</text>
+        <text x="2635" y="1022" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#9A3412" text-anchor="end">Kebutuhan: 2 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="1055" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.60 <tspan font-weight="bold" fill="#9A3412">(/30)</tspan></text>
+        <text x="2130" y="1055" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.63</text>
+        
+        <text x="1765" y="1085" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.61 - 10.82.16.62</text>
+        <path d="M 2150 285 L 2200 1140" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="1140" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="1140" width="900" height="32" rx="8" fill="#FFEDD5" />
+        <rect x="1750" y="1164" width="900" height="8" fill="#FFEDD5" />
+        <text x="1765" y="1162" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9A3412">Subnet 19: Link Wired - Navi</text>
+        <text x="2635" y="1162" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#9A3412" text-anchor="end">Kebutuhan: 2 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="1195" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.64 <tspan font-weight="bold" fill="#9A3412">(/30)</tspan></text>
+        <text x="2130" y="1195" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.67</text>
+        
+        <text x="1765" y="1225" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.65 - 10.82.16.66</text>
+        <path d="M 2150 285 L 2200 1280" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="1280" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="1280" width="900" height="32" rx="8" fill="#FFEDD5" />
+        <rect x="1750" y="1304" width="900" height="8" fill="#FFEDD5" />
+        <text x="1765" y="1302" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9A3412">Subnet 20: Link Schumann - Accela</text>
+        <text x="2635" y="1302" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#9A3412" text-anchor="end">Kebutuhan: 2 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="1335" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.68 <tspan font-weight="bold" fill="#9A3412">(/30)</tspan></text>
+        <text x="2130" y="1335" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.71</text>
+        
+        <text x="1765" y="1365" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.69 - 10.82.16.70</text>
+        <path d="M 2150 285 L 2200 1420" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="1420" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="1420" width="900" height="32" rx="8" fill="#FFEDD5" />
+        <rect x="1750" y="1444" width="900" height="8" fill="#FFEDD5" />
+        <text x="1765" y="1442" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9A3412">Subnet 21: Link Tachibana - Deus</text>
+        <text x="2635" y="1442" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#9A3412" text-anchor="end">Kebutuhan: 2 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="1475" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.72 <tspan font-weight="bold" fill="#9A3412">(/30)</tspan></text>
+        <text x="2130" y="1475" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.75</text>
+        
+        <text x="1765" y="1505" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.73 - 10.82.16.74</text>
+        <path d="M 2150 285 L 2200 1560" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="1560" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="1560" width="900" height="32" rx="8" fill="#FFEDD5" />
+        <rect x="1750" y="1584" width="900" height="8" fill="#FFEDD5" />
+        <text x="1765" y="1582" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9A3412">Subnet 22: Link Deus - Protocol7</text>
+        <text x="2635" y="1582" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#9A3412" text-anchor="end">Kebutuhan: 2 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="1615" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.76 <tspan font-weight="bold" fill="#9A3412">(/30)</tspan></text>
+        <text x="2130" y="1615" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.79</text>
+        
+        <text x="1765" y="1645" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.77 - 10.82.16.78</text>
+        <path d="M 2150 285 L 2200 1700" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="1700" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="1700" width="900" height="32" rx="8" fill="#FFEDD5" />
+        <rect x="1750" y="1724" width="900" height="8" fill="#FFEDD5" />
+        <text x="1765" y="1722" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9A3412">Subnet 23: Link Protocol7 - Knights</text>
+        <text x="2635" y="1722" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#9A3412" text-anchor="end">Kebutuhan: 2 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="1755" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.80 <tspan font-weight="bold" fill="#9A3412">(/30)</tspan></text>
+        <text x="2130" y="1755" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.83</text>
+        
+        <text x="1765" y="1785" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.81 - 10.82.16.82</text>
+        <path d="M 2150 285 L 2200 1840" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="1840" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="1840" width="900" height="32" rx="8" fill="#FFEDD5" />
+        <rect x="1750" y="1864" width="900" height="8" fill="#FFEDD5" />
+        <text x="1765" y="1862" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9A3412">Subnet 24: Link Knights - Phantoma</text>
+        <text x="2635" y="1862" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#9A3412" text-anchor="end">Kebutuhan: 2 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="1895" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.84 <tspan font-weight="bold" fill="#9A3412">(/30)</tspan></text>
+        <text x="2130" y="1895" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.87</text>
+        
+        <text x="1765" y="1925" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.85 - 10.82.16.86</text>
+        <path d="M 2150 285 L 2200 1980" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
+        <rect x="1750" y="1980" width="900" height="105" rx="8" fill="#FFFFFF" stroke="#FDBA74" stroke-width="2" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))" />
+        
+        <!-- Header row -->
+        <rect x="1750" y="1980" width="900" height="32" rx="8" fill="#FFEDD5" />
+        <rect x="1750" y="2004" width="900" height="8" fill="#FFEDD5" />
+        <text x="1765" y="2002" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9A3412">Subnet 25: Link Phantoma - Shibuya</text>
+        <text x="2635" y="2002" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#9A3412" text-anchor="end">Kebutuhan: 2 IP</text>
+        
+        <!-- Details row -->
+        <text x="1765" y="2035" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.16.88 <tspan font-weight="bold" fill="#9A3412">(/30)</tspan></text>
+        <text x="2130" y="2035" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Broadcast:</tspan> 10.82.16.91</text>
+        
+        <text x="1765" y="2065" font-family="Arial, sans-serif" font-size="13" fill="#475569"><tspan font-weight="bold">Rentang Host:</tspan> 10.82.16.89 - 10.82.16.90</text>
+        
+    <rect x="1250" y="2130" width="700" height="45" rx="6" fill="#1E293B" />
+    <circle cx="1330" cy="2152" r="8" fill="#1E40AF" />
+    <text x="1350" y="2157" font-family="Arial, sans-serif" font-size="13" fill="#FFFFFF">LAN Subnet</text>
+
+    <circle cx="1510" cy="2152" r="8" fill="#6B21A8" />
+    <text x="1530" y="2157" font-family="Arial, sans-serif" font-size="13" fill="#FFFFFF">Multi-Access Switch2</text>
+
+    <circle cx="1730" cy="2152" r="8" fill="#9A3412" />
+    <text x="1750" y="2157" font-family="Arial, sans-serif" font-size="13" fill="#FFFFFF">Point-to-Point WAN (/30)</text>
+    
+    </svg>
