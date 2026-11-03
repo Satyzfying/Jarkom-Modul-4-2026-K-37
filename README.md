@@ -104,10 +104,10 @@ Tujuan dari tahapan ini adalah merancang pengalamatan IP yang efisien dan terstr
 **Prinsip Desain & Aturan Perhitungan**:
 1. **Prioritas Kapasitas Terbesar**: Perhitungan subnet wajib diurutkan dari subnet dengan kebutuhan host terbesar menuju subnet dengan kebutuhan host terkecil (descending order). Hal ini mencegah fragmentasi blok alamat biner (*subnet overlap*).
 2. **Formula Kebutuhan IP Riil**: Setiap subnet tidak hanya menghitung end-device, melainkan dihitung berdasarkan formula:
-   $$	ext{Total Kebutuhan IP} = 	ext{Jumlah Host} + 	ext{Jumlah Interface Router pada Subnet} + 2 (	ext{Network ID} + 	ext{Broadcast})$$
+   $$\text{Total Kebutuhan IP} = \text{Jumlah Host} + \text{Jumlah Interface Router pada Subnet}$$
 3. **Optimasi Alokasi Prefix**:
    * Subnet dengan 881 host (Switch3) dan 514 host (Switch5) dialokasikan prefix `/22` (kapasitas 1024 IP).
-   * Subnet dengan 301 host (Switch4) dan 287 host (Switch9) dialokasikan prefix `/23` (kapasitas 512 IP).
+   * Subnet dengan 301 host (Switch4) dan 267 host (Switch9) dialokasikan prefix `/23` (kapasitas 512 IP).
    * Subnet dengan 254 host (Switch6) dan 143 host (Switch8) dialokasikan prefix `/24` (kapasitas 256 IP).
    * Subnet LAN menengah dialokasikan prefix `/25`, `/26`, dan `/27`.
    * Multi-access transit bus `Switch2` yang menghubungkan 4 router (Wired, Psyche, Copland, Schumann) dialokasikan prefix `/29` (kapasitas 8 IP, usable 6 IP).
@@ -122,11 +122,11 @@ Tujuan dari tahapan ini adalah merancang pengalamatan IP yang efisien dan terstr
 | 1 | **Switch3** | 881 | `255.255.252.0` (/22) | `10.82.0.0` | `10.82.0.1 - 10.82.3.254` | `10.82.3.255` | `10.82.0.1` (R-Psyche Fa0/1) |
 | 2 | **Switch5** | 514 | `255.255.252.0` (/22) | `10.82.4.0` | `10.82.4.1 - 10.82.7.254` | `10.82.7.255` | `10.82.4.1` (R-Accela Fa0/1) |
 | 3 | **Switch4** | 301 | `255.255.254.0` (/23) | `10.82.8.0` | `10.82.8.1 - 10.82.9.254` | `10.82.9.255` | `10.82.8.1` (R-Copland Fa0/1) |
-| 4 | **Switch9** | 287 | `255.255.254.0` (/23) | `10.82.10.0` | `10.82.10.1 - 10.82.11.254` | `10.82.11.255` | `10.82.10.1` (R-Tachibana Fa0/1) |
+| 4 | **Switch9** | 267 | `255.255.254.0` (/23) | `10.82.10.0` | `10.82.10.1 - 10.82.11.254` | `10.82.11.255` | `10.82.10.1` (R-Tachibana Fa0/1) |
 | 5 | **Switch6** | 254 | `255.255.255.0` (/24) | `10.82.12.0` | `10.82.12.1 - 10.82.12.254` | `10.82.12.255` | `10.82.12.1` (R-Navi Fa0/0) |
 | 6 | **Switch8** | 143 | `255.255.255.0` (/24) | `10.82.13.0` | `10.82.13.1 - 10.82.13.254` | `10.82.13.255` | `10.82.13.1` (R-Navi Fa0/1) |
 | 7 | **Switch10** | 99 | `255.255.255.128` (/25) | `10.82.14.0` | `10.82.14.1 - 10.82.14.126` | `10.82.14.127` | `10.82.14.1` (R-Deus Fa0/1) |
-| 8 | **Switch1** | 86 | `255.255.255.128` (/25) | `10.82.14.128` | `10.82.14.129 - 10.82.14.254` | `10.82.14.255` | `10.82.14.129` (R-Cyberia Fa0/1) |
+| 8 | **Switch1** | 126 | `255.255.255.128` (/25) | `10.82.14.128` | `10.82.14.129 - 10.82.14.254` | `10.82.14.255` | `10.82.14.129` (R-Cyberia Fa0/1) |
 | 9 | **Switch13** | 62 | `255.255.255.192` (/26) | `10.82.15.0` | `10.82.15.1 - 10.82.15.62` | `10.82.15.63` | `10.82.15.1` (R-Shibuya Fa0/1) |
 | 10 | **Switch7** | 58 | `255.255.255.192` (/26) | `10.82.15.64` | `10.82.15.65 - 10.82.15.126` | `10.82.15.127` | `10.82.15.65` (R-Navi Eth0/0/0) |
 | 11 | **Switch11** | 33 | `255.255.255.192` (/26) | `10.82.15.128` | `10.82.15.129 - 10.82.15.190` | `10.82.15.191` | `10.82.15.129` (R-Protocol7 Fa0/1) |
@@ -165,7 +165,7 @@ Pemisahan blok biner VLSM dari root supernet `10.82.0.0/19`:
 │   └── 10.82.8.0/21 (2048 IPs)
 │       ├── 10.82.8.0/22 (1024 IPs)
 │       │   ├── 10.82.8.0/23  --> [Subnet 3: Switch4 (Masayuki) - 301 Host]
-│       │   └── 10.82.10.0/23 --> [Subnet 4: Switch9 (Collective + Ghost) - 287 Host]
+│       │   └── 10.82.10.0/23 --> [Subnet 4: Switch9 (Collective + Ghost) - 267 Host]
 │       └── 10.82.12.0/22 (1024 IPs)
 │           ├── 10.82.12.0/23 (512 IPs)
 │           │   ├── 10.82.12.0/24 --> [Subnet 5: Switch6 (Alice + Reika) - 254 Host]
@@ -173,7 +173,7 @@ Pemisahan blok biner VLSM dari root supernet `10.82.0.0/19`:
 │           └── 10.82.14.0/23 (512 IPs)
 │               ├── 10.82.14.0/24 (256 IPs)
 │               │   ├── 10.82.14.0/25   --> [Subnet 7: Switch10 (Lilith + Specter) - 99 Host]
-│               │   └── 10.82.14.128/25 --> [Subnet 8: Switch1 (JJ + MyuMyu) - 86 Host]
+│               │   └── 10.82.14.128/25 --> [Subnet 8: Switch1 (JJ + MyuMyu) - 126 Host]
 │               └── 10.82.15.0/24 (256 IPs)
 │                   ├── 10.82.15.0/25 (128 IPs)
 │                   │   ├── 10.82.15.0/26   --> [Subnet 9: Switch13 (Lain + Mika) - 62 Host]

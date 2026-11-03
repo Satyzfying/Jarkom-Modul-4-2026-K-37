@@ -2,7 +2,7 @@
     <rect width="3200" height="2200" fill="#F8FAFC" />
     <rect x="0" y="0" width="3200" height="110" fill="#1E293B" />
     <text x="1600" y="45" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#FFFFFF" text-anchor="middle">DIAGRAM POHON BINER (TREE) VLSM — THE WIRED EXPANSION</text>
-    <text x="1600" y="85" font-family="Arial, sans-serif" font-size="16" fill="#94A3B8" text-anchor="middle">Kelompok: K-37  |  Prefix Induk: 10.82.0.0/19 (8.192 IP)  |  Total Subnet: 25 Subnet (16 LAN/Multi-Access + 9 WAN P2P)  |  Orang 1</text>
+    <text x="1600" y="85" font-family="Arial, sans-serif" font-size="16" fill="#94A3B8" text-anchor="middle">Kelompok: K-37  |  Prefix Induk: 10.82.0.0/19 (8.192 IP)  |  Total Subnet: 25 Subnet (16 LAN/Multi-Access + 9 WAN P2P)</text>
     
     <rect x="1420" y="170" width="360" height="65" rx="10" fill="#0F172A" stroke="#38BDF8" stroke-width="3" />
     <text x="1600" y="196" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#F8FAFC" text-anchor="middle">BLOK INDUK: 10.82.0.0/19</text>
@@ -66,7 +66,7 @@
         <rect x="250" y="720" width="900" height="32" rx="8" fill="#DBEAFE" />
         <rect x="250" y="744" width="900" height="8" fill="#DBEAFE" />
         <text x="265" y="742" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 4: Switch9 (Collective &amp; Ghost)</text>
-        <text x="1135" y="742" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 287 Host</text>
+        <text x="1135" y="742" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 267 Host</text>
         
         <!-- Details row -->
         <text x="265" y="775" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.10.0 <tspan font-weight="bold" fill="#1E40AF">(/23)</tspan></text>
@@ -122,7 +122,7 @@
         <rect x="250" y="1280" width="900" height="32" rx="8" fill="#DBEAFE" />
         <rect x="250" y="1304" width="900" height="8" fill="#DBEAFE" />
         <text x="265" y="1302" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E40AF">Subnet 8: Switch1 (JJ &amp; MyuMyu)</text>
-        <text x="1135" y="1302" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 86 Host</text>
+        <text x="1135" y="1302" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#1E40AF" text-anchor="end">Kebutuhan: 126 Host</text>
         
         <!-- Details row -->
         <text x="265" y="1335" font-family="Arial, sans-serif" font-size="13" fill="#334155"><tspan font-weight="bold">Network ID:</tspan> 10.82.14.128 <tspan font-weight="bold" fill="#1E40AF">(/25)</tspan></text>
