@@ -34,7 +34,10 @@
   - [5.2 Kebutuhan IP Tiap Subnet](#52-kebutuhan-ip-tiap-subnet)
   - [5.3 Pohon Penggabungan CIDR (Level I – IV)](#53-pohon-penggabungan-cidr-level-i--iv)
   - [5.4 Pembagian IP CIDR & Alokasi Interface](#54-pembagian-ip-cidr--alokasi-interface)
+  - [5.5 Studi Kasus Perhitungan Manual Subnetting CIDR (Subnet A6)](#55-studi-kasus-perhitungan-manual-subnetting-cidr-subnet-a6)
 - [6. Topologi GNS3](#6-topologi-gns3)
+  - [6.1 Peta Topologi & Pembagian Wilayah Subnet](#61-peta-topologi--pembagian-wilayah-subnet)
+  - [6.2 Tangkapan Layar Kanvas Proyek](#62-tangkapan-layar-kanvas-proyek)
 - [7. Konfigurasi Node GNS3 (/root/setup.sh)](#7-konfigurasi-node-gns3-rootsetupsh)
   - [7.1 Strategi Routing](#71-strategi-routing)
   - [7.2 Cyberia (NAT)](#72-cyberia-nat)
@@ -620,6 +623,10 @@ CIDR dikerjakan dengan cara **bottom-up**: subnet paling jauh dari Cyberia (NAT)
 | IV | E1 | D1 (/23) + D3 (/20) | /19 |
 | IV | E2 | B12 (/24) + D2 (/19) | /18 |
 
+Berikut adalah diagram visual hierarki penggabungan CIDR (*bottom-up supernetting*) bertingkat dari Level I hingga Level IV pada topologi jaringan:
+
+![Hierarki Penggabungan CIDR GNS3](assets/gns3/TOPOLOGI_GNS3_CIDR_HIERARCHY.png)
+
 ### 5.4 Pembagian IP CIDR & Alokasi Interface
 
 Hasil pembagian IP (Sheet 4 spreadsheet) beserta alamat yang dipasang pada tiap interface di GNS3:
@@ -656,13 +663,64 @@ Uplink Cyberia ke NAT1 memakai `192.168.122.50/24` dengan gateway `192.168.122.1
 
 Kesesuaian alamat di GNS3 dengan Sheet 4 dicek ulang menggunakan [`audit_cidr.py`](audit_cidr.py), yang membaca spreadsheet dan seluruh file [`gns3_configs/`](gns3_configs/). Hasilnya: 25/25 subnet terpakai, 0 mismatch, 0 IP ganda.
 
+### 5.5 Studi Kasus Perhitungan Manual Subnetting CIDR (Subnet A6)
+
+Sebagai bentuk pertanggungjawaban konseptual perhitungan matematis pengalamatan CIDR, berikut adalah langkah kalkulasi manual penentuan prefix, ukuran blok (*block size*), Network ID, Broadcast, dan rentang usable IP untuk **Subnet A6 (Sayap Barat - Switch3)**:
+
+#### 1. Menentukan Kebutuhan Host & Alokasi Prefix
+* **Perangkat dalam Subnet**: Host Karl (700 host) + Host Lin (180 host) + 1 antarmuka gateway router Psyche (`eth1`).
+* **Total Kebutuhan IP Riil**:
+  $$\text{Total Kebutuhan} = 700 + 180 + 1 = 881\text{ host}$$
+* **Rumus Kapasitas Subnet**:
+  $$2^n - 2 \ge \text{Kebutuhan Host}$$
+* **Pencarian Bit Host ($n$)**:
+  * Untuk $n = 9 \implies 2^9 - 2 = 510$ host (tidak mencukupi untuk 881 host).
+  * Untuk $n = 10 \implies 2^{10} - 2 = 1.022$ host (mencukupi).
+  * Diperoleh alokasi bit host $n = 10$.
+* **Penentuan Netmask CIDR**:
+  $$\text{Prefix} = 32 - n = 32 - 10 = \mathbf{/22}$$
+  Netmask desimal: `255.255.252.0`.
+
+#### 2. Menghitung Ukuran Blok (Block Size) & Lompatan Oktet
+* **Total Alokasi IP**:
+  $$\text{Block Size} = 2^{32 - \text{Prefix}} = 2^{32 - 22} = 2^{10} = 1.024\text{ IP}$$
+* **Lompatan Oktet ke-3**: Karena 1 oktet bernilai 256 alamat, maka:
+  $$\frac{1.024}{256} = 4$$
+  Artinya, alokasi blok Subnet A6 mencakup rentang 4 angka penuh pada oktet ketiga IP (misal: `10.82.0.0` s.d. `10.82.3.255`).
+
+#### 3. Menentukan Network ID, Broadcast, dan Next Network
+Berdasarkan hierarki pohon CIDR Kelompok 37, supernet Sayap Barat level II (`C5: 10.82.0.0/21`) menurunkan blok pertamanya secara berurutan ke Subnet A6:
+* **Network ID (NID)**: `10.82.0.0`
+* **Next Network**: Menambahkan nilai lompatan pada oktet ke-3:
+  $$0 + 4 = 4 \implies \text{Next Network} = 10.82.4.0$$
+* **Broadcast Address**: Tepat satu alamat sebelum *Next Network*:
+  $$\text{Broadcast} = 10.82.3.255$$
+
+#### 4. Menentukan Rentang Usable IP & Alokasi Perangkat
+* **IP Pertama (Gateway Router Psyche `eth1`)**:
+  $$\text{NID} + 1 \implies \mathbf{10.82.0.1}$$
+* **IP Terakhir**:
+  $$\text{Broadcast} - 1 \implies \mathbf{10.82.3.254}$$
+* **Konfigurasi Interface & End-Device**:
+  * Gateway Router Psyche (`eth1`): `10.82.0.1/22`
+  * Server Karl (`eth0`): `10.82.0.2/22` (Gateway `10.82.0.1`)
+  * Server Lin (`eth0`): `10.82.0.3/22` (Gateway `10.82.0.1`)
+
 ---
 
 ## 6. Topologi GNS3
 
 Project GNS3: `K-37-MODUL-4` (Server Group B `10.4.89.247`). Topologi berisi 1 NAT, 13 router, 13 switch, dan 25 host.
 
-![alt text](image-1.png)
+### 6.1 Peta Topologi & Pembagian Wilayah Subnet
+
+Berikut adalah peta topologi jaringan GNS3 yang dilengkapi dengan batas-batas wilayah *broadcast domain* untuk setiap subnet (A1 s.d. A25):
+
+![Peta Wilayah Subnet GNS3](assets/gns3/TOPOLOGI_GNS3_SUBNET.png)
+
+### 6.2 Tangkapan Layar Kanvas Proyek
+
+![Topologi GNS3 Kelompok 37](assets/gns3/TOPOLOGI_GNS3.png)
 
 ---
 
