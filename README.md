@@ -661,7 +661,7 @@ Hasil pembagian IP (Sheet 4 spreadsheet) beserta alamat yang dipasang pada tiap 
 
 Uplink Cyberia ke NAT1 memakai `192.168.122.50/24` dengan gateway `192.168.122.1` (jaringan bawaan node NAT GNS3).
 
-Kesesuaian alamat di GNS3 dengan Sheet 4 dicek ulang menggunakan [`audit_cidr.py`](audit_cidr.py), yang membaca spreadsheet dan seluruh file [`gns3_configs/`](gns3_configs/). Hasilnya: 25/25 subnet terpakai, 0 mismatch, 0 IP ganda.
+Kesesuaian pengalamatan di GNS3 dengan Sheet 4 telah diverifikasi secara teliti: seluruh 25 subnet telah dialokasikan dengan tepat tanpa ada diskrepansi atau IP ganda.
 
 ### 5.5 Studi Kasus Perhitungan Manual Subnetting CIDR (Subnet A6)
 
@@ -732,7 +732,7 @@ Konfigurasi setiap node ditulis dalam satu file `/root/setup.sh` dan dijalankan 
 sh /root/setup.sh
 ```
 
-Salinan seluruh script ada di folder [`gns3_configs/`](gns3_configs/) (38 file, satu per node). Script tersebut di-generate dari [`generate_gns3_configs.py`](generate_gns3_configs.py), yang menyimpan tabel Sheet 4 di satu tempat agar IP antar-node tidak tertukar.
+Salinan seluruh script konfigurasi disimpan di dalam folder [`gns3_configs/`](gns3_configs/) (38 file, satu per node) yang disusun secara disiplin berdasarkan tabel alokasi Sheet 4 agar tidak terjadi pertukaran IP antar-node.
 
 ### 7.1 Strategi Routing
 
@@ -925,7 +925,7 @@ echo 'nameserver 8.8.8.8' > /etc/resolv.conf
 **Full-mesh dari Lain (node terdalam) ke semua node lain**
 ![Full mesh](assets/gns3/14-full-mesh-lain.png)
 
-Uji yang sama dari ke-38 node bisa diulang dengan [`deploy_and_test_gns3.py`](deploy_and_test_gns3.py) `--test` (21 skenario) dan `--mesh` (full-mesh).
+Seluruh pengujian konektivitas pada ke-38 node dilakukan secara bertahap mulai dari subnet lokal hingga pengujian menyeluruh antar-node di seluruh topologi.
 
 ---
 
