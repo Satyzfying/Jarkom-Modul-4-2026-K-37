@@ -29,6 +29,21 @@
   - [4.2 Uji Ping Lintas Router (Cross-Router Sayap Barat)](#42-uji-ping-lintas-router-cross-router-sayap-barat)
   - [4.3 Uji Ping End-to-End Lintas Topologi (Ujung ke Ujung 8-Hop)](#43-uji-ping-end-to-end-lintas-topologi-ujung-ke-ujung-8-hop)
   - [4.4 Uji Ping ke Luar / Cloud (Internet via NAT Overload Cyberia)](#44-uji-ping-ke-luar--cloud-internet-via-nat-overload-cyberia)
+- [5. Perhitungan CIDR (Bagian GNS3)](#5-perhitungan-cidr-bagian-gns3)
+  - [5.1 Konsep & Aturan Penggabungan](#51-konsep--aturan-penggabungan)
+  - [5.2 Kebutuhan IP Tiap Subnet](#52-kebutuhan-ip-tiap-subnet)
+  - [5.3 Pohon Penggabungan CIDR (Level I – IV)](#53-pohon-penggabungan-cidr-level-i--iv)
+  - [5.4 Pembagian IP CIDR & Alokasi Interface](#54-pembagian-ip-cidr--alokasi-interface)
+- [6. Topologi GNS3](#6-topologi-gns3)
+- [7. Konfigurasi Node GNS3 (/root/setup.sh)](#7-konfigurasi-node-gns3-rootsetupsh)
+  - [7.1 Strategi Routing](#71-strategi-routing)
+  - [7.2 Cyberia (NAT)](#72-cyberia-nat)
+  - [7.3 Wired (Core Hub)](#73-wired-core-hub)
+  - [7.4 Router Sayap Barat & Navi](#74-router-sayap-barat--navi)
+  - [7.5 Rantai Timur (Tachibana s.d. Shibuya)](#75-rantai-timur-tachibana-sd-shibuya)
+  - [7.6 Konfigurasi Host](#76-konfigurasi-host)
+- [8. Uji Konektivitas GNS3](#8-uji-konektivitas-gns3)
+- [9. Kendala & Penyelesaian](#9-kendala--penyelesaian)
 
 ---
 
@@ -526,3 +541,339 @@ Ping statistics for 8.8.8.8:
 ```
 Bukti Tangkapan Layar Ping Internet via NAT:
 ![Bukti Ping Internet NAT](assets/9-ping-internet.png)
+
+---
+
+# Laporan Praktikum Modul 4 (Bagian GNS3 & CIDR)
+
+Pada GNS3 digunakan metode **CIDR** (berbeda dengan CPT yang memakai VLSM). Seluruh node memakai image `ardhptr21/debinet:latest`, dan konfigurasi tiap node disimpan di `/root/setup.sh`.
+
+## 5. Perhitungan CIDR (Bagian GNS3)
+
+### 5.1 Konsep & Aturan Penggabungan
+
+CIDR dikerjakan dengan cara **bottom-up**: subnet paling jauh dari Cyberia (NAT) digabung lebih dulu dengan subnet tetangganya, lalu hasil gabungan digabung lagi naik ke arah Cyberia sampai tersisa satu blok besar.
+
+* Setiap penggabungan menghasilkan netmask **satu tingkat di atas netmask subnet terbesar** yang digabung:
+
+  $$\text{Netmask Gabungan} = \text{Netmask Subnet Terbesar} - 1$$
+
+  Contoh: A24 (`/30`) + A25 (`/26`) → B1 `/25`.
+* Pembagian IP dilakukan **top-down**. Blok terbesar dipecah sesuai pohon, sehingga subnet yang lokasinya berdekatan berada di blok alamat yang berdekatan. Inilah yang membuat routing bisa diringkas (*summarization*).
+* Jumlah IP tiap subnet = jumlah host + jumlah interface router pada subnet tersebut, lalu dibulatkan ke blok 2ⁿ.
+
+### 5.2 Kebutuhan IP Tiap Subnet
+
+| Subnet | Rute | Jumlah IP | Netmask |
+|:---:|:---|:---:|:---:|
+| A1 | Cyberia > Switch1 > JJ, MyuMyu | 126 | /25 |
+| A2 | Cyberia > Wired | 2 | /30 |
+| A3 | Wired > Tachibana | 2 | /30 |
+| A4 | Wired > Navi | 2 | /30 |
+| A5 | Wired > Switch2 > Psyche, Copland, Schumann | 6 | /29 |
+| A6 | Psyche > Switch3 > Karl, Lin | 1022 | /22 |
+| A7 | Copland > Switch4 > Masayuki | 510 | /23 |
+| A8 | Copland > Juri | 62 | /26 |
+| A9 | Schumann > Akashic | 6 | /29 |
+| A10 | Schumann > Accela | 2 | /30 |
+| A11 | Accela > Switch5 > Omnipresence, Denpa | 1022 | /22 |
+| A12 | Navi > Switch6 > Alice, Reika | 254 | /24 |
+| A13 | Navi > Switch8 > Yasuo, Miho, Kuma | 254 | /24 |
+| A14 | Navi > Switch7 > Taro | 62 | /26 |
+| A15 | Tachibana > Switch9 > Collective, Ghost | 510 | /23 |
+| A16 | Tachibana > Deus | 2 | /30 |
+| A17 | Deus > Switch10 > Lilith, Specter | 126 | /25 |
+| A18 | Deus > Protocol7 | 2 | /30 |
+| A19 | Protocol7 > Switch11 > Chisa, Hodgeson | 62 | /26 |
+| A20 | Protocol7 > Knights | 2 | /30 |
+| A21 | Knights > Eiri | 6 | /29 |
+| A22 | Knights > Phantoma | 2 | /30 |
+| A23 | Phantoma > Switch12 > Semi | 30 | /27 |
+| A24 | Phantoma > Shibuya | 2 | /30 |
+| A25 | Shibuya > Switch13 > Lain, Mika | 62 | /26 |
+
+### 5.3 Pohon Penggabungan CIDR (Level I – IV)
+
+| Level | Subnet Baru | Gabungan dari | Netmask Akhir |
+|:---:|:---:|:---|:---:|
+| I | B1 | A24 (/30) + A25 (/26) | /25 |
+| I | B2 | A22 (/30) + A23 (/27) | /26 |
+| I | B3 | A20 (/30) + A21 (/29) | /28 |
+| I | B4 | A18 (/30) + A19 (/26) | /25 |
+| I | B5 | A16 (/30) + A17 (/25) | /24 |
+| I | B6 | A3 (/30) + A15 (/23) | /22 |
+| I | B7 | A10 (/30) + A11 (/22) | /21 |
+| I | B8 | A9 (/29) + A5 (/29) | /28 |
+| I | B9 | A8 (/26) + A7 (/23) | /22 |
+| I | B10 | A12 (/24) + A13 (/24) | /23 |
+| I | B11 | A4 (/30) + A14 (/26) | /25 |
+| I | B12 | A2 (/30) + A1 (/25) | /24 |
+| II | C1 | B1 (/25) + B2 (/26) | /24 |
+| II | C2 | B3 (/28) + B4 (/25) | /24 |
+| II | C3 | B5 (/24) + B6 (/22) | /21 |
+| II | C4 | B7 (/21) + B8 (/28) | /20 |
+| II | C5 | B9 (/22) + A6 (/22) | /21 |
+| II | C6 | B10 (/23) + B11 (/25) | /22 |
+| III | D1 | C1 (/24) + C2 (/24) | /23 |
+| III | D2 | C4 (/20) + C5 (/21) | /19 |
+| III | D3 | C3 (/21) + C6 (/22) | /20 |
+| IV | E1 | D1 (/23) + D3 (/20) | /19 |
+| IV | E2 | B12 (/24) + D2 (/19) | /18 |
+
+### 5.4 Pembagian IP CIDR & Alokasi Interface
+
+Hasil pembagian IP (Sheet 4 spreadsheet) beserta alamat yang dipasang pada tiap interface di GNS3:
+
+| Subnet | Network ID | Netmask | Broadcast | Alokasi di GNS3 |
+|:---:|:---|:---|:---|:---|
+| A1 | `10.82.24.0/25` | 255.255.255.128 | 10.82.24.127 | Cyberia eth1 `.1`, JJ `.2`, MyuMyu `.3` |
+| A2 | `10.82.24.128/30` | 255.255.255.252 | 10.82.24.131 | Cyberia eth2 `.129`, Wired eth0 `.130` |
+| A3 | `10.82.19.40/30` | 255.255.255.252 | 10.82.19.43 | Wired eth2 `.41`, Tachibana eth0 `.42` |
+| A4 | `10.82.22.64/30` | 255.255.255.252 | 10.82.22.67 | Wired eth3 `.65`, Navi eth3 `.66` |
+| A5 | `10.82.10.80/29` | 255.255.255.248 | 10.82.10.87 | Wired eth1 `.81`, Psyche eth0 `.82`, Copland eth0 `.83`, Schumann eth0 `.84` |
+| A6 | `10.82.0.0/22` | 255.255.252.0 | 10.82.3.255 | Psyche eth1 `10.82.0.1`, Karl `.0.2`, Lin `.0.3` |
+| A7 | `10.82.8.0/23` | 255.255.254.0 | 10.82.9.255 | Copland eth1 `10.82.8.1`, Masayuki `.8.2` |
+| A8 | `10.82.10.0/26` | 255.255.255.192 | 10.82.10.63 | Copland eth2 `.1`, Juri `.2` |
+| A9 | `10.82.10.72/29` | 255.255.255.248 | 10.82.10.79 | Schumann eth1 `.73`, Akashic `.74` |
+| A10 | `10.82.10.64/30` | 255.255.255.252 | 10.82.10.67 | Schumann eth2 `.65`, Accela eth0 `.66` |
+| A11 | `10.82.4.0/22` | 255.255.252.0 | 10.82.7.255 | Accela eth1 `10.82.4.1`, Omnipresence `.4.2`, Denpa `.4.3` |
+| A12 | `10.82.20.0/24` | 255.255.255.0 | 10.82.20.255 | Navi eth0 `.1`, Alice `.2`, Reika `.3` |
+| A13 | `10.82.21.0/24` | 255.255.255.0 | 10.82.21.255 | Navi eth1 `.1`, Yasuo `.2`, Miho `.3`, Kuma `.4` |
+| A14 | `10.82.22.0/26` | 255.255.255.192 | 10.82.22.63 | Navi eth2 `.1`, Taro `.2` |
+| A15 | `10.82.16.0/23` | 255.255.254.0 | 10.82.17.255 | Tachibana eth1 `10.82.16.1`, Collective `.16.2`, Ghost `.16.3` |
+| A16 | `10.82.19.44/30` | 255.255.255.252 | 10.82.19.47 | Tachibana eth2 `.45`, Deus eth0 `.46` |
+| A17 | `10.82.18.0/25` | 255.255.255.128 | 10.82.18.127 | Deus eth1 `.1`, Lilith `.2`, Specter `.3` |
+| A18 | `10.82.19.48/30` | 255.255.255.252 | 10.82.19.51 | Deus eth2 `.49`, Protocol7 eth0 `.50` |
+| A19 | `10.82.18.128/26` | 255.255.255.192 | 10.82.18.191 | Protocol7 eth1 `.129`, Chisa `.130`, Hodgeson `.131` |
+| A20 | `10.82.19.52/30` | 255.255.255.252 | 10.82.19.55 | Protocol7 eth2 `.53`, Knights eth0 `.54` |
+| A21 | `10.82.19.32/29` | 255.255.255.248 | 10.82.19.39 | Knights eth1 `.33`, Eiri `.34` |
+| A22 | `10.82.19.56/30` | 255.255.255.252 | 10.82.19.59 | Knights eth2 `.57`, Phantoma eth0 `.58` |
+| A23 | `10.82.19.0/27` | 255.255.255.224 | 10.82.19.31 | Phantoma eth1 `.1`, Semi `.2` |
+| A24 | `10.82.19.60/30` | 255.255.255.252 | 10.82.19.63 | Phantoma eth2 `.61`, Shibuya eth0 `.62` |
+| A25 | `10.82.18.192/26` | 255.255.255.192 | 10.82.18.255 | Shibuya eth1 `.193`, Lain `.194`, Mika `.195` |
+
+Uplink Cyberia ke NAT1 memakai `192.168.122.50/24` dengan gateway `192.168.122.1` (jaringan bawaan node NAT GNS3).
+
+Kesesuaian alamat di GNS3 dengan Sheet 4 dicek ulang menggunakan [`audit_cidr.py`](audit_cidr.py), yang membaca spreadsheet dan seluruh file [`gns3_configs/`](gns3_configs/). Hasilnya: 25/25 subnet terpakai, 0 mismatch, 0 IP ganda.
+
+---
+
+## 6. Topologi GNS3
+
+Project GNS3: `K-37-MODUL-4` (Server Group B `10.4.89.247`). Topologi berisi 1 NAT, 13 router, 13 switch, dan 25 host.
+
+![alt text](image-1.png)
+
+---
+
+## 7. Konfigurasi Node GNS3 (/root/setup.sh)
+
+Konfigurasi setiap node ditulis dalam satu file `/root/setup.sh` dan dijalankan dengan:
+
+```sh
+sh /root/setup.sh
+```
+
+Salinan seluruh script ada di folder [`gns3_configs/`](gns3_configs/) (38 file, satu per node). Script tersebut di-generate dari [`generate_gns3_configs.py`](generate_gns3_configs.py), yang menyimpan tabel Sheet 4 di satu tempat agar IP antar-node tidak tertukar.
+
+### 7.1 Strategi Routing
+
+Routing memakai **static route** (tanpa OSPF/RIP), dengan prinsip:
+
+1. **Stub router memakai default route saja**: Psyche, Copland, Accela, Navi, dan Shibuya hanya punya satu jalan keluar, jadi cukup `ip route add default via <next-hop>`.
+2. **Transit router memakai summary CIDR**: Wired, Tachibana, Deus, Protocol7, dan Knights cukup menyimpan satu route untuk satu blok gabungan di arah bawah, bukan satu route per subnet.
+3. Jika blok summary ikut mencakup link P2P yang sebenarnya berada di **atas** router tersebut, ditambahkan satu route yang lebih spesifik ke arah atas. Prinsip *longest prefix match* memastikan tidak terjadi loop.
+
+| Router | Jumlah static route | Route |
+|:---|:---:|:---|
+| Cyberia | 2 | default → NAT1, `10.82.0.0/19` → Wired |
+| Wired | 7 | default → Cyberia, `10.82.0.0/22` → Psyche, `10.82.4.0/22` & `10.82.10.64/28` → Schumann, `10.82.8.0/22` → Copland, `10.82.16.0/22` → Tachibana, `10.82.20.0/22` → Navi |
+| Psyche, Copland, Accela, Navi, Shibuya | 1 | default saja |
+| Schumann | 2 | default → Wired, `10.82.4.0/22` → Accela |
+| Tachibana | 2 | default → Wired, `10.82.18.0/23` → Deus |
+| Deus | 4 | default → Tachibana, `10.82.18.128/25` & `10.82.19.0/26` → Protocol7, `10.82.19.40/30` → Tachibana |
+| Protocol7 | 4 | default → Deus, `10.82.18.192/26` & `10.82.19.0/26` → Knights, `10.82.19.40/29` → Deus |
+| Knights | 4 | default → Protocol7, `10.82.18.192/26`, `10.82.19.0/27`, `10.82.19.60/30` → Phantoma |
+| Phantoma | 2 | default → Knights, `10.82.18.192/26` → Shibuya |
+
+### 7.2 Cyberia (NAT)
+
+```sh
+#!/bin/sh
+sysctl -w net.ipv4.ip_forward=1
+
+ip addr flush dev eth0
+ip addr add 192.168.122.50/24 dev eth0
+ip link set eth0 up
+
+ip route add default via 192.168.122.1
+
+ip addr flush dev eth1
+ip addr add 10.82.24.1/25 dev eth1
+ip link set eth1 up
+
+ip addr flush dev eth2
+ip addr add 10.82.24.129/30 dev eth2
+ip link set eth2 up
+
+ip route add 10.82.0.0/19 via 10.82.24.130
+
+iptables -t nat -F POSTROUTING
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+echo 'nameserver 8.8.8.8' > /etc/resolv.conf
+```
+
+* `MASQUERADE` pada eth0 menerjemahkan seluruh alamat `10.82.x.x` menjadi IP Cyberia di jaringan NAT1.
+* `10.82.0.0/19` cukup satu route untuk mengembalikan semua trafik ke Wired.
+
+![Cyberia NAT](assets/gns3/4-cyberia-nat.png)
+
+### 7.3 Wired (Core Hub)
+
+![Wired setup.sh](assets/gns3/2-wired-setup-sh.png)
+
+* Route sayap barat dipecah per router di Switch2. `10.82.8.0/22` (Copland) sekaligus mencakup Switch4 `10.82.8.0/23` dan Juri `10.82.10.0/26`. Blok `10.82.10.64/28` (A10 + A9 milik Schumann) lebih spesifik, jadi tetap diarahkan ke Schumann.
+* Seluruh rantai timur (`10.82.16.0` – `10.82.19.255`) cukup `10.82.16.0/22` ke Tachibana.
+* Seluruh cabang Navi (`10.82.20.0` – `10.82.23.255`) cukup `10.82.20.0/22` ke Navi.
+* `send_redirects=0`: Psyche, Copland, dan Schumann berada dalam satu segmen (Switch2) dan default route-nya ke Wired. Paket di antara mereka diteruskan Wired kembali lewat eth1. ICMP redirect dimatikan agar hasil ping di segmen ini tidak tercampur pesan *Redirect Host*.
+
+![Wired routing](assets/gns3/3-wired-ip-route.png)
+
+### 7.4 Router Sayap Barat & Navi
+
+```sh
+# Psyche
+ip addr add 10.82.10.82/29 dev eth0
+ip addr add 10.82.0.1/22 dev eth1
+ip route add default via 10.82.10.81
+
+# Copland
+ip addr add 10.82.10.83/29 dev eth0
+ip addr add 10.82.8.1/23 dev eth1
+ip addr add 10.82.10.1/26 dev eth2
+ip route add default via 10.82.10.81
+
+# Schumann
+ip addr add 10.82.10.84/29 dev eth0
+ip addr add 10.82.10.73/29 dev eth1
+ip addr add 10.82.10.65/30 dev eth2
+ip route add default via 10.82.10.81
+ip route add 10.82.4.0/22 via 10.82.10.66
+
+# Accela
+ip addr add 10.82.10.66/30 dev eth0
+ip addr add 10.82.4.1/22 dev eth1
+ip route add default via 10.82.10.65
+
+# Navi
+ip addr add 10.82.20.1/24 dev eth0
+ip addr add 10.82.21.1/24 dev eth1
+ip addr add 10.82.22.1/26 dev eth2
+ip addr add 10.82.22.66/30 dev eth3
+ip route add default via 10.82.22.65
+```
+
+(Setiap router juga menjalankan `sysctl -w net.ipv4.ip_forward=1`, serta `ip addr flush` dan `ip link set <iface> up` sebelum dan sesudah memasang alamat. Script lengkapnya ada di `gns3_configs/`.)
+
+### 7.5 Rantai Timur (Tachibana s.d. Shibuya)
+
+```sh
+# Tachibana
+ip route add default via 10.82.19.41
+ip route add 10.82.18.0/23 via 10.82.19.46
+
+# Deus
+ip route add default via 10.82.19.45
+ip route add 10.82.18.128/25 via 10.82.19.50
+ip route add 10.82.19.0/26 via 10.82.19.50
+ip route add 10.82.19.40/30 via 10.82.19.45
+
+# Protocol7
+ip route add default via 10.82.19.49
+ip route add 10.82.18.192/26 via 10.82.19.54
+ip route add 10.82.19.0/26 via 10.82.19.54
+ip route add 10.82.19.40/29 via 10.82.19.49
+
+# Knights
+ip route add default via 10.82.19.53
+ip route add 10.82.18.192/26 via 10.82.19.58
+ip route add 10.82.19.0/27 via 10.82.19.58
+ip route add 10.82.19.60/30 via 10.82.19.58
+
+# Phantoma
+ip route add default via 10.82.19.57
+ip route add 10.82.18.192/26 via 10.82.19.62
+
+# Shibuya
+ip route add default via 10.82.19.61
+```
+
+Penjelasan route pada Deus:
+* `10.82.18.128/25` = Switch11 (`18.128/26`) + Switch13 (`18.192/26`).
+* `10.82.19.0/26` = Switch12, Eiri, dan link P2P Protocol7–Knights, Knights–Phantoma, serta Phantoma–Shibuya.
+* Blok `/26` tersebut ikut mencakup `10.82.19.40/30` (link Wired–Tachibana) yang posisinya di atas Deus. Karena itu ditambahkan route `/30` yang lebih spesifik ke Tachibana. Tanpa route ini, paket ke `10.82.19.41` akan memantul bolak-balik antara Deus dan Protocol7.
+* Protocol7 memakai pola yang sama dengan `10.82.19.40/29` (link Wired–Tachibana dan Tachibana–Deus).
+
+![Deus routing](assets/gns3/5-deus-route.png)
+![Protocol7 routing](assets/gns3/6-protocol7-route.png)
+
+### 7.6 Konfigurasi Host
+
+Semua host memakai pola yang sama, misalnya Karl:
+
+```sh
+#!/bin/sh
+ip addr flush dev eth0
+ip addr add 10.82.0.2/22 dev eth0
+ip link set eth0 up
+
+ip route add default via 10.82.0.1
+echo 'nameserver 8.8.8.8' > /etc/resolv.conf
+```
+
+---
+
+## 8. Uji Konektivitas GNS3
+
+| No | Uji | Hasil |
+|:---:|:---|:---:|
+| 1 | Intra-LAN: JJ → MyuMyu | 0% loss |
+| 2 | Lintas Switch2: Karl → Masayuki | 0% loss |
+| 3 | Dalam segmen Switch2: Psyche → Accela & Juri | 0% loss |
+| 4 | Ujung ke ujung: Lain → Karl (9 hop) | 0% loss |
+| 5 | Ujung ke ujung: Mika → Miho (cabang Navi) | 0% loss |
+| 6 | Internet via NAT: JJ & Lain → 8.8.8.8 | 0% loss |
+| 7 | Full-mesh: setiap node ping ke 37 node lain | **1406/1406 berhasil** |
+
+**Intra-LAN (JJ → MyuMyu)**
+![Ping intra LAN](assets/gns3/7-ping-intra-lan.png)
+
+**Lintas Switch2 (Karl → Masayuki)**
+![Ping lintas Switch2](assets/gns3/8-ping-lintas-switch2.png)
+
+**Dalam segmen Switch2 (Psyche → Accela `10.82.10.66` & Juri `10.82.10.2`)**
+![Ping segmen Switch2](assets/gns3/9-ping-segmen-switch2.png)
+
+**Ujung ke ujung (Lain → Karl) + traceroute**: jalurnya Shibuya → Phantoma → Knights → Protocol7 → Deus → Tachibana → Wired → Psyche → Karl.
+![Ping end to end](assets/gns3/10-ping-end-to-end.png)
+
+**Ujung ke ujung ke cabang Navi (Mika → Miho)**
+![Ping ke Navi](assets/gns3/11-ping-ke-navi.png)
+
+**Internet lewat NAT Cyberia**
+![Ping internet JJ](assets/gns3/12-ping-internet-jj.png)
+![Ping internet Lain](assets/gns3/13-ping-internet-lain.png)
+
+**Full-mesh dari Lain (node terdalam) ke semua node lain**
+![Full mesh](assets/gns3/14-full-mesh-lain.png)
+
+Uji yang sama dari ke-38 node bisa diulang dengan [`deploy_and_test_gns3.py`](deploy_and_test_gns3.py) `--test` (21 skenario) dan `--mesh` (full-mesh).
+
+---
+
+## 9. Kendala & Penyelesaian
+
+1. **Subnet A5, A9, A10 sempat tertukar.** Konfigurasi awal memakai `10.82.10.72/29` untuk Switch2, `10.82.10.64/29` untuk Akashic, dan `10.82.10.80/30` untuk Schumann–Accela. Alokasi ini tidak sesuai Sheet 4, lalu diperbaiki menjadi A5 `10.82.10.80/29`, A9 `10.82.10.72/29`, dan A10 `10.82.10.64/30`, beserta penyesuaian next-hop di Wired, Psyche, Copland, Schumann, dan Accela.
+2. **Summary `10.82.19.0/24` di Deus dan Protocol7 menimbulkan loop.** Blok tersebut ikut mencakup link `10.82.19.40/30` dan `10.82.19.44/30` yang berada di arah atas. Solusinya: summary diperkecil menjadi `/26`, ditambah satu route spesifik ke arah atas (lihat 7.5).
+3. **Link Wired eth3 – Navi eth3 tidak meneruskan paket.** IP dan route sudah benar, tetapi counter TX/RX menunjukkan trafik tidak lewat, dan server GNS3 melaporkan *Adapter 3 is not connected*. Link dibuat ulang di adapter dan port yang sama (Wired 3/0 – Navi 3/0) saat kedua node dalam kondisi stop. Setelah node dinyalakan lagi dan `setup.sh` dijalankan ulang, link normal kembali.
+4. **Ping antar router di Switch2 menampilkan "Redirect Host".** Ini perilaku normal Linux router pada segmen multi-access. Pesan tersebut dihilangkan dengan `send_redirects=0` di Wired (lihat 7.3).
