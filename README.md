@@ -225,7 +225,7 @@ Bukti Diagram Visual Pohon VLSM:
 
 ### 2.1 Maksud Perancangan Perangkat & Port Ekspansi
 
-Topologi jaringan disimulasikan menggunakan **Cisco Packet Tracer 9.0+** pada file resmi [`Modul4_K37_Topology.pkt`](Modul4_K37_Topology.pkt). Total terdapat **52 perangkat aktif**:
+Topologi jaringan disimulasikan menggunakan **Cisco Packet Tracer 9.0+** pada berkas resmi [`projects/Modul4_K37_Topology.pkt`](projects/Modul4_K37_Topology.pkt) (tersedia pula salinan di [root](Modul4_K37_Topology.pkt)). Total terdapat **52 perangkat aktif**:
 1. **1 Node Cloud-PT**: Mensimulasikan jaringan eksternal (Internet / ISP) dan menyediakan gateway NAT publik.
 2. **13 Router Cisco 2811**:
    * Secara standar, router Cisco 2811 hanya dilengkapi dengan **2 port FastEthernet** onboard (`FastEthernet0/0` dan `FastEthernet0/1`).
@@ -623,7 +623,11 @@ CIDR dikerjakan dengan cara **bottom-up**: subnet paling jauh dari Cyberia (NAT)
 | IV | E1 | D1 (/23) + D3 (/20) | /19 |
 | IV | E2 | B12 (/24) + D2 (/19) | /18 |
 
-Berikut adalah diagram visual hierarki penggabungan CIDR (*bottom-up supernetting*) bertingkat dari Level I hingga Level IV pada topologi jaringan:
+Berikut adalah diagram visual pohon penggabungan CIDR (*bottom-up supernetting tree*) bertingkat dari Level I hingga Level IV, diagram pohon pembagian subnetting biner CIDR (*binary splitting tree*), serta peta visual hierarki penggabungan langsung pada kanvas topologi jaringan:
+
+![Pohon Penggabungan CIDR](assets/gns3/pohon_penggabungan_cidr.png)
+
+![Tree Subnetting CIDR](assets/gns3/tree_subnetting_cidr.png)
 
 ![Hierarki Penggabungan CIDR GNS3](assets/gns3/TOPOLOGI_GNS3_CIDR_HIERARCHY.png)
 
@@ -710,7 +714,7 @@ Berdasarkan hierarki pohon CIDR Kelompok 37, supernet Sayap Barat level II (`C5:
 
 ## 6. Topologi GNS3
 
-Project GNS3: `K-37-MODUL-4` (Server Group B `10.4.89.247`). Topologi berisi 1 NAT, 13 router, 13 switch, dan 25 host.
+Project GNS3: `K-37-MODUL-4` (Server Group B `10.4.89.247`). Berkas ekspor proyek portabel resmi tersedia pada tautan berikut: [`projects/Modul-4-K37.gns3project`](projects/Modul-4-K37.gns3project). Topologi terdiri dari 1 NAT, 13 router, 13 switch, dan 25 host.
 
 ### 6.1 Peta Topologi & Pembagian Wilayah Subnet
 
