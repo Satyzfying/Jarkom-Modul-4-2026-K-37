@@ -532,15 +532,19 @@ Bukti Tangkapan Layar Ping End-to-End:
 
 Pengujian dari PC **JJ** menembus translasi NAT router Cyberia menuju alamat gateway Cloud / Internet:
 ```cmd
-C:\> ping 8.8.8.8
+C:\>ping 8.8.8.8
+
 Pinging 8.8.8.8 with 32 bytes of data:
-Reply from 8.8.8.8: bytes=32 time=12ms TTL=54
-Reply from 8.8.8.8: bytes=32 time=11ms TTL=54
-Reply from 8.8.8.8: bytes=32 time=10ms TTL=54
-Reply from 8.8.8.8: bytes=32 time=11ms TTL=54
+
+Reply from 8.8.8.8: bytes=32 time=18ms TTL=255
+Reply from 8.8.8.8: bytes=32 time<1ms TTL=255
+Reply from 8.8.8.8: bytes=32 time=1ms TTL=255
+Reply from 8.8.8.8: bytes=32 time<1ms TTL=255
 
 Ping statistics for 8.8.8.8:
-    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 18ms, Average = 4ms
 ```
 Bukti Tangkapan Layar Ping Internet via NAT:
 ![Bukti Ping Internet NAT](assets/9-ping-internet.png)
