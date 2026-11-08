@@ -296,9 +296,6 @@ ip nat inside source list 1 interface FastEthernet0/0 overload
 ip route 10.82.0.0 255.255.224.0 10.82.16.58
 ```
 
-Bukti Tangkapan Layar Konfigurasi & NAT Translation Cyberia:
-![Bukti Cyberia NAT & DHCP](assets/4-cyberia-nat-dhcp.png)
-
 ---
 
 ### 3.3 Router Wired (Core Transit Hub)
